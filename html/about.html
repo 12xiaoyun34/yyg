@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们</title>
+    <style>
+        :root{
+            --bg1:#BCE0FB;
+            --bg2:#E1BEE7;
+            --card:rgba(255,255,255,.25);
+            --text:#2c3e50;
+            --vip:#ff4757;
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            background:linear-gradient(135deg,var(--bg1),var(--bg2));
+            color:var(--text);
+            padding:40px 20px;
+        }
+        /* 旋转头像 */
+        .avatar{
+            width:160px;
+            height:160px;
+            border-radius:50%;
+            object-fit:cover;
+            animation:rotate 20s linear infinite;
+            box-shadow:0 0 30px rgba(0,0,0,.15);
+            transition:transform .6s cubic-bezier(.4,0,.2,1);
+        }
+        .avatar:hover{
+            transform:scale(1.08);
+        }
+        @keyframes rotate{
+            to{transform:rotate(360deg)}
+        }
+
+        h1{
+            margin:30px 0 10px;
+            font-size:32px;
+            letter-spacing:2px;
+            font-weight:600;
+            background:linear-gradient(90deg,#11998e,#38ef7d);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        /* 卡片 */
+        .card{
+            width:100%;
+            max-width:420px;
+            background:var(--card);
+            backdrop-filter:blur(20px);
+            border:1px solid rgba(255,255,255,.3);
+            border-radius:20px;
+            padding:35px 40px;
+            box-shadow:0 8px 32px rgba(31,38,135,.15);
+            animation:fadeInUp .8s ease-out;
+        }
+        @keyframes fadeInUp{
+            from{opacity:0;transform:translateY(30px)}
+            to{opacity:1;transform:none}
+        }
+
+        .row{
+            display:flex;
+            align-items:center;
+            margin-bottom:20px;
+            font-size:17px;
+            position:relative;
+        }
+        .row:last-child{margin-bottom:0}
+        .row label{
+            width:100px;
+            font-weight:600;
+            margin-right:20px;
+            flex-shrink:0;
+            color:#34495e;
+        }
+        .row span{
+            flex:1;
+            word-break:break-all;
+            color:#2c3e50;
+        }
+        .row a{
+            color:#3498db;
+            text-decoration:none;
+            transition:color .3s;
+        }
+        .row a:hover{color:#2980b9}
+
+        /* VIP 徽章 */
+        .vip-badge{
+            display:inline-flex;
+            align-items:center;
+            background:linear-gradient(135deg,var(--vip),#ff6b81);
+            color:#fff;
+            padding:6px 16px;
+            border-radius:30px;
+            font-weight:700;
+            font-size:16px;
+            box-shadow:0 4px 15px rgba(255,71,87,.35);
+            animation:pulse 2s infinite;
+        }
+        @keyframes pulse{
+            0%,100%{transform:scale(1)}
+            50%{transform:scale(1.05)}
+        }
+        .vip-badge svg{
+            width:20px;
+            height:20px;
+            margin-right:6px;
+            fill:#fff;
+        }
+
+        /* 响应式 */
+        @media(max-width:500px){
+            .card{padding:30px 25px}
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../img/清雨阁.jpg" alt="App Icon" class="avatar">
+    <h1>关于我们</h1>
+
+    <div class="card">
+        <div class="row">
+            <label>阁主</label>
+            <span class="vip-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-.01L12 2z"/></svg>
+                三生邪
+            </span>
+        </div>
+        <div class="row">
+            <label>QQ频道号</label>
+            <span>RainAtelier0</span>
+        </div>
+        <div class="row">
+            <label>团队名称</label>
+            <span>清雨阁</span>
+        </div>
+        <div class="row">
+            <label>网页开发者的邮箱</label>
+            <span>xaioyun123@qq.com</span>
+        </div>
+        <div class="row">
+            <label>我们的网址</label>
+            <span>https://12xiaoyun34.github.io/yyg/index.html</span>
+        </div>
+          <div class="row">
+            <label>返回</label>
+            <span><a href="../index.html" target="_blank">点击返回</a></span>
+        </div>
+    </div>
+</body>
+</html>

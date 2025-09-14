@@ -1,0 +1,70 @@
+body{
+    background-image: url('../img/bg.png');
+    background-size: cover; /* 或使用 contain */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.main-bar{
+    background-color: #ffffff7c;
+    border-radius: 20px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+.title-bar{
+    background-color: #2772ff;
+    border-radius: 20px;
+    width: 90%;
+    padding: 20px;
+    border: 5px solid #ffffff;
+}
+.title-bar h1{
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.title-bar h3{
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.container {
+	display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    min-height: 100vh;      
+}
+.card{
+    background-color: #2772ff;
+    border-radius: 20px;
+    width: 80%;
+    padding: 20px;
+    border: 5px solid rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+}
+.container0 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0px;
+}
+.card h1{
+    color:#ffffff;
+    text-align: center;
+}
+.card p{
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+}
+.btn{
+    text-decoration: none;
+    background-color: #2772ff;
+    border: 2px solid rgb(240, 240, 240);
+    border-radius: 20px;
+    color: #ffffff;
+    padding: 6px;
+    text-align: center;
+}
