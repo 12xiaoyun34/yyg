@@ -1,46 +1,161 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>清雨阁|向梦想前进</title>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
-    <body class="container">
-        <br>
-        <div class="title-bar">
-            <h1><i class="fas fa-jet-fighter"></i>清雨阁主页</h1>
-            <h3>向梦想前进</h3>
-        </div><br>
-        <div class="main-bar">
-            <br>
-            <div class="card">
-                <div class="container0">
-                    <img src="./img/铁傀儡.png" width="120"/>
-                    <h1>我们正在等待你的到来</h1>
-                </div>
-                <p>我们期待你加入我们的团队，我们需要和你一同创下辉煌</p>
-                <a class="btn" href="./html/joinour.html">点击查看</a>
-            </div>
-            <br>
-            <div class="card">
-                <div class="container0">
-                    <img src="./img/dog.png" width="120"/>
-                    <h1>团队重要公告及通知</h1>
-                </div>
-                <p>我们期待你加入我们的团队，我们需要和你一同创下辉煌</p>
-                <a class="btn" href="./html/tongzhi.html">点击查看</a>
-            </div>
-            <br>
-            <div class="card">
-                <div class="container0">
-                    <img src="./img/鸡.png" width="110"/>
-                    <h1>关于我们团队</h1>
-                </div>
-                <p>可前往查看有关于我们团队的信息</p>
-                <a class="btn" href="./html/about.html">前往查看</a>
-            </div>
-            <br>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清雨阁 | 向梦想出发</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header id="header">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-q"></i></div>
+            <div class="logo-text">清雨<span>阁</span></div>
         </div>
-    </body>
-<html>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#team">团队成员</a></li>
+                <li><a href="#projects">项目展示</a></li>
+                <li><a href="#contact">联系我们</a></li>
+                <li><a href="./html/km.html">文档</a></li>
+            </ul>
+            <button class="nav-btn" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 标题图片区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>创新科技，塑造未来</h1>
+            <p>我们励志创造更好的模组、更好的组件，为玩家提供更好的游玩体验</p>
+            <div>
+                <a href="#about" class="btn">了解更多</a>
+                <a href="#contact" class="btn btn-outline">联系我们</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们区域 -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>关于我们</h2>
+            <p>我们励志创造更好的模组、更好的组件，为玩家提供更好的游玩体验</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>这里是一座梦想的阁楼<br>这里是一个无限的舞台<br>这里是幻想之地<br>这里是“清雨阁”<br>无论你有什么想法<br>无论你有何种遇见<br>这里欢迎你们<br>努力将心中所想实现</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- 服务区域 -->
+    <section class="section services" id="services">
+        <div class="section-title">
+            <h2>我们的服务</h2>
+            <p>我们提供全方位的数字解决方案，帮助您的业务在数字时代脱颖而出</p>
+        </div>
+        <div class="services-container">
+            暂无...
+        </div>
+    </section>
+
+    <!-- 团队成员区域 -->
+    <section class="section" id="team">
+        <div class="section-title">
+            <h2>主要成员</h2>
+            <p>认识我们才华横溢的团队成员，他们是我们成功的关键</p>
+        </div>
+        <div class="team-container">
+            <div class="team-member">
+                <div class="member-img" style="background-image: url('./img/三生邪.jpg')"></div>
+                <div class="member-info">
+                    <h3>三生邪</h3>
+                    <p>阁主/创始人</p>
+                    <div class="social-links">
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-img" style="background-image: url('./img/小云.jpg')"></div>
+                <div class="member-info">
+                    <h3>小云</h3>
+                    <p>材质包设计师</p>
+                    <div class="social-links">
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-img" style="background-image: url('./img/萝挽.jpg')"></div>
+                <div class="member-info">
+                    <h3>萝*挽*</h3>
+                    <p>管理</p>
+                    <div class="social-links">
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-img" style="background-image: url('./img/掉色人.jpg')"></div>
+                <div class="member-info">
+                    <h3>掉色人</h3>
+                    <p>程序开发</p>
+                    <div class="social-links">
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="a-">
+        <a href="./html/morecy.html">查看其它重要成员></a>
+        </div>
+    </section>
+
+    <!-- 项目展示区域 -->
+    <section class="section projects" id="projects">
+        <div class="section-title">
+            <h2>项目展示</h2>
+            <p>项目成就团队精神</p>
+        </div>
+        <div class="projects-container">
+            <p>期待我们的成就...</p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p><i class="fas fa-envelope"></i> 网页创作者邮箱：xaioyun123@qq.com</p>
+                <p><i class="fas fa-phone"></i>暂无</p>
+                <p><i class="fas fa-map-marker-alt"></i> 暂无</p>
+                <p><i class="fas fa-q"></i>创始人qq：1839658102</p>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <a href="#home"><i class="fas fa-arrow-right"></i> 首页</a>
+                <a href="#about"><i class="fas fa-arrow-right"></i> 关于我们</a>
+                <a href="#services"><i class="fas fa-arrow-right"></i> 服务</a>
+                <a href="#projects"><i class="fas fa-arrow-right"></i> 项目展示</a>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <a href="#"><i class="fab fa-weixin"></i> 微信公众号（暂无）</a>
+                <a href="#"><i class="fab fa-zhihu"></i> 知乎（暂无）</a>
+                <a href="#"><i class="fab fa-github"></i> GitHub（暂无）</a>
+                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn（暂无）</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 清雨阁 版权所有</p>
+        </div>
+    </footer>
+    <script src="./js/index.js"></script>
+</body>
+</html>

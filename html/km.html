@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邀请码登录系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #4e54c8;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #4e54c8;
+            box-shadow: 0 0 0 2px rgba(78, 84, 200, 0.2);
+            outline: none;
+        }
+        
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            color: #777;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #4e54c8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #3f44a7;
+        }
+        
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .info {
+            margin-top: 25px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .info a {
+            color: #4e54c8;
+            text-decoration: none;
+        }
+        
+        .hint {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>邀请码登录</h1>
+            <p>请输入您的邀请码以访问系统</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="input-group">
+                <label for="invite-code">邀请码</label>
+                <input type="text" id="invite-code" placeholder="请输入您的邀请码">
+                <i class="fas fa-key"></i>
+                <p class="hint"></p>
+            </div>
+            
+            <button class="btn" id="login-btn">登录</button>
+            
+            <div class="message error" id="error-message">
+                邀请码无效，请检查后重试
+            </div>
+            
+            <div class="message success" id="success-message">
+                邀请码验证成功，正在跳转...
+            </div>
+            
+            <div class="info">
+                没有邀请码？<a href="#">请联系管理员获取</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inviteCodeInput = document.getElementById('invite-code');
+            const loginBtn = document.getElementById('login-btn');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            const validCodes = ['rainatelier449'];
+            
+            loginBtn.addEventListener('click', function() {
+                const code = inviteCodeInput.value.trim();
+                
+                // 隐藏所有消息
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                
+                // 验证邀请码
+                if (code === '') {
+                    errorMessage.textContent = '请输入邀请码';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                if (validCodes.includes(code)) {
+                    // 邀请码有效
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    
+                    // 模拟登录成功后的跳转
+                    setTimeout(function() {
+                        alert('登陆成功');
+                        // 实际应用中这里会进行页面跳转
+                        window.location.href = 'login.html';
+                    }, 1000);
+                } else {
+                    // 邀请码无效
+                    errorMessage.textContent = '邀请码无效，请检查后重试';
+                    errorMessage.style.display = 'block';
+                    
+                    // 摇动动画效果
+                    inviteCodeInput.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        inviteCodeInput.style.animation = '';
+                    }, 500);
+                }
+            });
+            
+            // 按Enter键也可以提交
+            inviteCodeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginBtn.click();
+                }
+            });
+        });
+        
+        // 添加摇动动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(-10px); }
+                40% { transform: translateX(10px); }
+                60% { transform: translateX(-10px); }
+                80% { transform: translateX(10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
