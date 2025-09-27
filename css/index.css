@@ -274,10 +274,11 @@
         .about-image {
             flex: 1;
             min-width: 300px;
-            height: 400px;
-            background: url('../img/清雨阁.jpg');
+            height: 300px;
+            background: url('../img/logo.png');
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-size: cover;
         }
         
         /* 服务区域 */

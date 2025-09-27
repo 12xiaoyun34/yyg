@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意见反馈系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #fcc96a  0%, #f7a100 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .feedback-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #fcc96a, #f7a100);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            animation: slideIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(2) { animation-delay: 0.1s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.3s; }
+        .form-group:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .email-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .email-option {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+
+        .email-option:hover {
+            border-color: #f7a100;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .email-option.selected {
+            border-color: #f7a100;
+            background: linear-gradient(135deg, #fcc96a, #f7a100);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #f7a100;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #fcc96a, #f7a100);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-btn:active:not(:disabled)::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .countdown {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .countdown.show {
+            opacity: 1;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .success-message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-container">
+        <h1>意见反馈</h1>
+        
+        <div class="form-group">
+            <label>选择反馈的官方邮箱：</label>
+            <div class="email-selector">
+                <div class="email-option" data-email="xaioyun123@qq.com">
+                    QQ邮箱(推荐)
+                </div>
+                <div class="email-option" data-email="15372042923@163.com">
+                    163邮箱
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>反馈标题：</label>
+            <input type="text" id="title" placeholder="请简要描述您的问题或建议">
+            <div class="error" id="titleError">请输入反馈标题</div>
+        </div>
+
+        <div class="form-group">
+            <label>您的QQ号：</label>
+            <input type="text" id="qq" placeholder="方便我们联系您">
+            <div class="error" id="qqError">请输入正确的QQ号</div>
+        </div>
+
+        <div class="form-group">
+            <label>详细反馈：</label>
+            <textarea id="feedback" placeholder="请详细描述您遇到的问题或建议..."></textarea>
+            <div class="error" id="feedbackError">请输入反馈内容</div>
+        </div>
+
+        <button class="submit-btn" onclick="submitFeedback()" id="submitBtn">
+            <span id="btnText">提交反馈</span>
+        </button>
+        
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSuccess()"></div>
+    <div class="success-message" id="successMessage">
+        <div class="success-icon"></div>
+        <h2 style="color: #333; margin-bottom: 10px;">提交成功！</h2>
+        <p style="color: #666;">感谢您的宝贵意见，我们会尽快处理</p>
+        <button style="margin-top: 20px; padding: 10px 30px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="closeSuccess()">确定</button>
+    </div>
+
+    <script>
+        let selectedEmail = null;
+        let countdown = 0;
+        let countdownTimer = null;
+
+        // 邮箱选择
+        document.querySelectorAll('.email-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.email-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedEmail = this.dataset.email;
+            });
+        });
+
+        // 输入验证
+        function validateInput() {
+            let isValid = true;
+            
+            if (!selectedEmail) {
+                document.querySelector('.email-selector').classList.add('shake');
+                setTimeout(() => document.querySelector('.email-selector').classList.remove('shake'), 500);
+                isValid = false;
+            }
+
+            const title = document.getElementById('title').value.trim();
+            if (!title) {
+                showError('titleError');
+                isValid = false;
+            } else {
+                hideError('titleError');
+            }
+
+            const qq = document.getElementById('qq').value.trim();
+            if (!qq || !/^\d{5,12}$/.test(qq)) {
+                showError('qqError');
+                isValid = false;
+            } else {
+                hideError('qqError');
+            }
+
+            const feedback = document.getElementById('feedback').value.trim();
+            if (!feedback) {
+                showError('feedbackError');
+                isValid = false;
+            } else {
+                hideError('feedbackError');
+            }
+
+            return isValid;
+        }
+
+        function showError(errorId) {
+            const errorEl = document.getElementById(errorId);
+            errorEl.style.display = 'block';
+            errorEl.parentElement.classList.add('shake');
+            setTimeout(() => errorEl.parentElement.classList.remove('shake'), 500);
+        }
+
+        function hideError(errorId) {
+            document.getElementById(errorId).style.display = 'none';
+        }
+
+        async function submitFeedback() {
+            if (!validateInput()) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            
+            btnText.textContent = '提交中...';
+            submitBtn.disabled = true;
+
+            const params = new URLSearchParams({
+                root: selectedEmail,
+                name: '用户反馈',
+                sjt: document.getElementById('title').value.trim(),
+                content: `QQ号：${document.getElementById('qq').value.trim()}\n\n反馈内容：\n${document.getElementById('feedback').value.trim()}`
+            });
+
+            const apiUrl = `https://api.fohok.xin/API/mail.php?${params}`;
+
+            try {
+                await fetch(apiUrl);
+                showSuccess();
+                startCountdown(60);
+                resetForm();
+            } catch (error) {
+                alert('提交失败，请稍后重试');
+                btnText.textContent = '提交反馈';
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('successMessage').classList.add('show');
+        }
+
+        function closeSuccess() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function resetForm() {
+            document.getElementById('title').value = '';
+            document.getElementById('qq').value = '';
+            document.getElementById('feedback').value = '';
+            document.querySelectorAll('.email-option').forEach(opt => opt.classList.remove('selected'));
+            selectedEmail = null;
+        }
+
+        function startCountdown(seconds) {
+            countdown = seconds;
+            const countdownEl = document.getElementById('countdown');
+            countdownEl.classList.add('show');
+            
+            clearInterval(countdownTimer);
+            countdownTimer = setInterval(() => {
+                countdownEl.textContent = `${countdown}秒后可再次提交`;
+                countdown--;
+                if (countdown < 0) {
+                    clearInterval(countdownTimer);
+                    countdownEl.classList.remove('show');
+                    document.getElementById('submitBtn').disabled = false;
+                    document.getElementById('btnText').textContent = '提交反馈';
+                }
+            }, 1000);
+        }
+
+        // 输入时隐藏错误提示
+        document.getElementById('title').addEventListener('input', () => hideError('titleError'));
+        document.getElementById('qq').addEventListener('input', () => hideError('qqError'));
+        document.getElementById('feedback').addEventListener('input', () => hideError('feedbackError'));
+    </script>
+</body>
+</html>
